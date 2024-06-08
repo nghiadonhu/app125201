@@ -1,0 +1,99 @@
+<style>
+
+    #logoutBtn {
+        margin-left: 750px;
+        margin-top: -33px;
+        font-size: 10px;
+        opacity: 0; /* Ẩn nút Logout ban đầu */
+        transition: opacity 0.3s ease; /* Thêm hiệu ứng transition */
+    }
+  
+    #logoutBtn:hover {
+        opacity: 1; /* Hiển thị nút Logout khi hover */
+    }
+  </style>
+  
+  <div class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-6">
+            <button id="logoutBtn" class="btn btn-primary btn-lg" (click)="logout()">Logout</button>
+        </div>
+    </div>
+  </div>
+  <div>
+  
+  <!-- <div  class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-6">
+          <button style="margin-left: 750px;margin-top: -33px;font-size: 10px;" class="btn btn-primary btn-lg" (click)="logout()">Logout</button>
+        </div>
+    </div>
+  </div> -->
+  
+  
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Quản lý tin tức</h6>
+      </div>
+  
+      <div class="card-body">
+        <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatatt']">Thêm</a>
+  
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            
+            <thead>
+              
+             
+              <tr>
+                <th>STT</th>
+                <th>Mã nhân viên</th>
+                <th>Ngày nhập</th>
+                <th>Ảnh</th>
+                <th>Mô tả</th>
+                <th>Tên tiêu đề</th>
+                
+                <th></th>
+                <!-- <th></th>
+                                              <th></th> -->
+              </tr>
+            </thead>
+  
+            <tbody>
+              
+              <tr *ngFor="let item of subjects | paginate: { itemsPerPage: 7, currentPage: p };let i = index ">
+                <td>{{i}}</td>
+                <td>{{item.Nhanvien_id}}</td>
+                <td>{{item.Ngaynhap}}</td>
+               
+                <!-- <td>{{item.Tensanpham}}</td> -->
+                <td>
+                  <img src="../assets/img/{{item.Anh}}" alt="" style="width: 100px; height: auto;">
+               
+  
+                </td>
+  
+                
+                <td>  <div [innerHTML]="item.Mota"></div></td>
+                
+  
+  
+  
+                <td>
+                  <div style="padding-left:10px ;">
+                  <a style="margin-left: 3px;" (click)="editItemtt(item.id,item.Nhanvien_id,item.Ngaynhap,item.Anh,item.Mota,item.Tentieude)" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                  <a style="margin-left: 3px;" (click)="editItemtt(item.id,item.Nhanvien_id,item.Ngaynhap,item.Anh,item.Mota,item.Tentieude)"class="btn btn-info fa fa-eye"></a>
+                  <a style="margin-left: 3px;" (click)="removeItemtt(item.id)" class="btn btn-danger "> <i class="fa fa-trash"></i></a>
+                </div>
+                   
+                
+                </td>
+  
+  
+            </tbody>
+           
+          </table>
+          <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>

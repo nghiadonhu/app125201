@@ -1,0 +1,26 @@
+
+
+<div class="container">
+    <h2>Sửa nhà cung cấp</h2>
+  
+    <form #editItemFormsp="ngForm" (ngSubmit)="editItem(editItemFormsp.value.id, editItemFormsp.value.Tenncc, editItemFormsp.value.Diachi, editItemFormsp.value.Sdt)" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="id">Item ID:</label>
+        <input type="number" id="id" name="id" [(ngModel)]="category.id" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="Tenncc">Tên nhà cung cấp:</label>
+        <input type="text" id="Tenncc" name="Tenncc" [(ngModel)]="category.Tenncc" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="Diachi">Địa chỉ:</label>
+        <input type="text" id="Diachi" name="Diachi" [(ngModel)]="category.Diachi" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="Sdt">Sđt:</label>
+        <input type="text" id="Sdt" name="Sdt" [(ngModel)]="category.Sdt" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Sửa</button>
+    </form>
+  </div>
+  

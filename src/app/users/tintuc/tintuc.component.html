@@ -1,0 +1,39 @@
+
+        <!-- <<<<<<<<<<<<<<<<<<<< Breadcumb Area End <<<<<<<<<<<<<<<<<<<< -->
+        <div class="breadcumb_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ol class="breadcrumb d-flex align-items-center">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="#">Tin tức</a></li>
+                            <!-- <li class="breadcrumb-item active">Xe số</li> -->
+                        </ol>
+                        <!-- btn -->
+                        <a [routerLink]="['/users/index']" class="backToHome d-block"><i class="fa fa-angle-double-left"></i> Trở lại </a>
+
+                        <div class="quickview_pro_des" *ngFor="let item of subjects">
+                            <h4 class="title">{{item.Tentieude}}</h4>
+                            <div class="top_seller_product_rating mb-15">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <img src="../assets/img/{{item.Anh}}" alt="">
+                            <p style="margin-top: 30px;" [innerHTML]="item.Mota"></p>
+                          
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+      
+
+       
+

@@ -1,0 +1,71 @@
+
+<!-- *ngFor="let product of product" -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Quản lý chi tiết đơn hàng</h6>
+    </div>
+
+    <div class="card-body">
+      <!-- <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatasp']">Xác nhận đơn hàng</a> -->
+      <!-- <button class="btn btn-dark fa fa-plus" (click)="confirmOrder()">Xác nhận đơn hàng</button> -->
+      <button style="margin-bottom: 15px;" class="btn btn-dark" (click)="confirmOrder()">
+        <i class="fa fa-check"></i>&nbsp;Xác nhận
+    </button>
+         
+    <button  class="btn btn-danger float-right" (click)="cancelOrder()">
+        <i class="fa fa-times"></i>&nbsp;Hủy
+    </button>
+
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <!-- <th>Khachhang_id</th> -->
+              <th>Mã đơn hàng</th>
+             
+              <th>Mã sản phẩm</th>
+              <th>Tên sản phẩm</th>
+              <th>Anh</th>
+              <th>Số lượng</th>
+              <th>Giá bán</th>
+              <th>Tổng tiền</th>
+              
+              <!-- `Ctdh_id`, `Donhang_id`, `Sanpham_id`, `Tensanpham`, `Anh`, `Soluong`, `Gia`, `Tongtien` -->
+              <!-- <th></th>
+                                            <th></th> -->
+
+                                           
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of product| paginate: { itemsPerPage: 7, currentPage: p };let i = index">
+              <td>{{i}}</td>
+              <!-- <td>{{item.Khachhang_id}}</td> -->
+              <td>{{item.Donhang_id}}</td>
+             
+
+              <td>{{item.Sanpham_id}}</td>
+              <td>{{item.Tensanpham}}</td>
+              <td>
+                <img src="../assets/img/{{item.Anh}}" alt="" style="width: 100px; height: auto;">
+             
+
+              </td>
+              <td>{{item.Soluong}}</td>
+              <td>{{formatCurrency(item.Gia)}}đ</td>
+              <td>{{formatCurrency(item.Tongtien)}}đ</td>
+            
+
+
+
+              
+
+
+          </tbody>
+        </table>
+        <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>

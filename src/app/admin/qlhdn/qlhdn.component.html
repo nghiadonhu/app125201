@@ -1,0 +1,60 @@
+
+
+<div>
+
+
+
+
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Quản lý hóa đơn nhập</h6>
+      </div>
+  
+      <div class="card-body">
+        <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatahdn']">Thêm</a>
+  
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <!-- <th>id</th> -->
+                <th>Mã nhân viên</th>
+                <th>Thành tiền</th>
+                <th>Ngày nhập</th>
+                <th>Mã nhà cung cấp</th>
+               <th></th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr *ngFor="let item of subjects| paginate: { itemsPerPage: 7, currentPage: p };let i = index">
+                <td>{{i}}</td>
+                <td>{{item.Nhanvien_id}}</td>
+                <td>{{formatCurrency(item.Thanhtien)}}đ</td>
+                
+  
+                <td>{{item.Ngaynhap}}</td>
+                <td>{{item.Ncc_id}}</td>
+               
+  
+  
+  
+                <td>
+
+                  <div style="padding-left:10px ;">
+                    <a style="margin-left: 3px;" (click)="editItemhdn(item.id,item.Nhanvien_id,item.Thanhtien,item.Ngaynhap,item.Ncc_id)" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                    <a style="margin-left: 3px;" (click)="redirectToDetailPage(item)" class="btn btn-info fa fa-eye"></a>
+                    <a style="margin-left: 3px;" (click)="removeItemhdn(item.id)" class="btn btn-danger "> <i class="fa fa-trash"></i></a>
+                  </div>
+                  
+  
+                </td>
+  
+  
+            </tbody>
+          </table>
+          <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>

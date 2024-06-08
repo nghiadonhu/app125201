@@ -1,0 +1,44 @@
+<!-- Add Bootstrap classes to your HTML elements -->
+<div class="container">
+    <h2>Thêm tin tức</h2>
+  
+    <form #addItemForm="ngForm" (ngSubmit)="addNewItem(addItemForm.value)" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="Nhanvien_id">Mã nhân viên:</label>
+        <select id="Nhanvien_id" name="Nhanvien_id" [(ngModel)]="selectedNhanvien_id" class="form-control" required>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.Tennhanvien }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="Ngaynhap">Ngày nhập:</label>
+        <input type="text" id="Ngaynhap"  name="Ngaynhap" ngModel class="form-control" required>
+        <!-- <ckeditor [(ngModel)]="itemData.Ngaynhap" [editor]="createEditor()" [config]="editorConfig" name="Ngaynhap"></ckeditor> -->
+      </div>
+  
+      <div class="form-group">
+        <label for="Anh">Ảnh:</label>
+        <!-- <input type="text" id="Anh" name="Anh" ngModel class="form-control" required> -->
+        <input type="file" ngModel (change)="onFileSelected($event)" />
+      </div>
+  
+      
+  
+      <div class="form-group">
+        <label for="Mota">Mô tả:</label>
+        <ckeditor [(ngModel)]="itemData.Mota" [editor]="createEditor()" [config]="editorConfig" name="Mota"></ckeditor>
+      </div>
+      
+      
+  
+      <div class="form-group">
+        <label for="Tentieude">Tên tiêu đề:</label>
+        <input type="text" id="Tentieude" name="Tentieude" ngModel class="form-control" required>
+      </div>
+  
+     
+  
+      <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+  </div>
+  

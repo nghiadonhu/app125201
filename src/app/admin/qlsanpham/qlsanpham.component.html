@@ -1,0 +1,111 @@
+<style>
+
+  #logoutBtn {
+      margin-left: 750px;
+      margin-top: -33px;
+      font-size: 10px;
+      opacity: 0; /* Ẩn nút Logout ban đầu */
+      transition: opacity 0.3s ease; /* Thêm hiệu ứng transition */
+  }
+
+  #logoutBtn:hover {
+      opacity: 1; /* Hiển thị nút Logout khi hover */
+  }
+</style>
+
+<div class="container">
+  <div class="row justify-content-end">
+      <div class="col-md-6">
+          <button id="logoutBtn" class="btn btn-primary btn-lg" (click)="logout()">Logout</button>
+      </div>
+  </div>
+</div>
+<div>
+
+<!-- <div  class="container">
+  <div class="row justify-content-end">
+      <div class="col-md-6">
+        <button style="margin-left: 750px;margin-top: -33px;font-size: 10px;" class="btn btn-primary btn-lg" (click)="logout()">Logout</button>
+      </div>
+  </div>
+</div> -->
+
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Quản lý sản phẩm</h6>
+    </div>
+
+    <div class="card-body">
+      <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatasp']">Thêm</a>
+
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          
+          <thead>
+            
+           
+            <tr>
+              <th>STT</th>
+              <th>Mã loại</th>
+              <th>Tên sản phẩm</th>
+              <th>Ảnh</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+              <th>Mã lực</th>
+              <th>Phân Khúc</th>
+              <th>Vòng tua máy</th>
+              <th>Mô mem xoắn</th>
+              <th>Giá khuyến mại</th>
+              <th>Lượt xem</th>
+              <th>ReducePrice</th>
+              <th></th>
+              <!-- <th></th>
+                                            <th></th> -->
+            </tr>
+          </thead>
+
+          <tbody>
+            
+            <tr *ngFor="let item of subjects | paginate: { itemsPerPage: 7, currentPage: p };let i = index ">
+              <td>{{i}}</td>
+              <td>{{item.Maloai_id}}</td>
+            
+              <td>  <div [innerHTML]="item.Tensanpham"></div></td>
+              <!-- <td>{{item.Tensanpham}}</td> -->
+              <td>
+                <img src="../assets/img/{{item.Anh}}" alt="" style="width: 100px; height: auto;">
+             
+
+              </td>
+
+              <td>{{item.Soluong}}</td>
+              <td>{{formatCurrency(item.Gia)}}đ</td>
+              <td>  <div [innerHTML]="item.Maluc"></div></td>
+              <td>{{item.PhanKhuc}}</td>
+              <td>{{item.VongTuaMay}}</td>
+              <td>{{item.MoMenXoan}}</td>
+              <td>{{formatCurrency(item.Giakhuyenmai)}}đ</td>
+              <td>{{item.ViewCount}}</td>
+              <td>{{item.ReducePrice}}</td>
+
+
+
+              <td>
+                <div style="padding-left:10px ;">
+                <a style="margin-left: 3px;" (click)="editItemsp(item.id,item.Maloai_id,item.Tensanpham,item.Anh,item.Soluong,item.Gia,item.Maluc,item.PhanKhuc,item.VongTuaMay,item.MoMenXoan,item.Giakhuyenmai,item.ViewCount,item.ReducePrice)" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                <a style="margin-left: 3px;" (click)="editItemsp(item.id,item.Maloai_id,item.Tensanpham,item.Anh,item.Soluong,item.Gia,item.Maluc,item.PhanKhuc,item.VongTuaMay,item.MoMenXoan,item.Giakhuyenmai,item.ViewCount,item.ReducePrice)"class="btn btn-info fa fa-eye"></a>
+                <a style="margin-left: 3px;" (click)="removeItemsp(item.id)" class="btn btn-danger "> <i class="fa fa-trash"></i></a>
+              </div>
+                 
+              
+              </td>
+
+
+          </tbody>
+         
+        </table>
+        <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>

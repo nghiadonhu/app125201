@@ -76,13 +76,13 @@
                 
                 <td>  <div [innerHTML]="item.Mota"></div></td>
                 
-  
+                <td>{{item.Tentieude}}</td>
   
   
                 <td>
                   <div style="padding-left:10px ;">
                   <a style="margin-left: 3px;" (click)="editItemtt(item.id,item.Nhanvien_id,item.Ngaynhap,item.Anh,item.Mota,item.Tentieude)" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                  <a style="margin-left: 3px;" (click)="editItemtt(item.id,item.Nhanvien_id,item.Ngaynhap,item.Anh,item.Mota,item.Tentieude)"class="btn btn-info fa fa-eye"></a>
+                  <!-- <a style="margin-left: 3px;" (click)="editItemtt(item.id,item.Nhanvien_id,item.Ngaynhap,item.Anh,item.Mota,item.Tentieude)"class="btn btn-info fa fa-eye"></a> -->
                   <a style="margin-left: 3px;" (click)="removeItemtt(item.id)" class="btn btn-danger "> <i class="fa fa-trash"></i></a>
                 </div>
                    

@@ -38,7 +38,14 @@
 
     <div class="card-body">
       <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatasp']">Thêm</a>
-
+      <!-- <input type="text" [(ngModel)]="searchTerm"> -->
+      <!-- <button (click)="search()">Tìm kiếm</button> -->
+      <!-- <input type="text" [(ngModel)]="searchTerm" (keyup)="search()"> -->
+      <div style="float: right; margin-bottom: 10px;" class="col-4">
+        <input type="text" [(ngModel)]="searchTerm" (keyup)="search()" class="form-control float-right" placeholder="Tìm kiếm...">
+      </div>
+      
+      <!-- <input type="text" [(ngModel)]="searchTerm" (keyup)="search()" class="form-control float-right" placeholder="Tìm kiếm..."> -->
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           
@@ -58,14 +65,14 @@
               <th>Mô mem xoắn</th>
               <th>Giá khuyến mại</th>
               <th>Lượt xem</th>
-              <th>ReducePrice</th>
+              <th>Lượt bán</th>
               <th></th>
               <!-- <th></th>
                                             <th></th> -->
             </tr>
           </thead>
 
-          <tbody>
+          <tbody *ngIf="!searchTerm">
             
             <tr *ngFor="let item of subjects | paginate: { itemsPerPage: 7, currentPage: p };let i = index ">
               <td>{{i}}</td>
@@ -103,7 +110,44 @@
 
 
           </tbody>
-         
+          <tbody *ngIf="searchTerm">
+            
+            <tr *ngFor="let item of searchResult | paginate: { itemsPerPage: 7, currentPage: p };let i = index ">
+              <td>{{i}}</td>
+              <td>{{item.Maloai_id}}</td>
+            
+              <td>  <div [innerHTML]="item.Tensanpham"></div></td>
+              <!-- <td>{{item.Tensanpham}}</td> -->
+              <td>
+                <img src="../assets/img/{{item.Anh}}" alt="" style="width: 100px; height: auto;">
+             
+
+              </td>
+
+              <td>{{item.Soluong}}</td>
+              <td>{{formatCurrency(item.Gia)}}đ</td>
+              <td>  <div [innerHTML]="item.Maluc"></div></td>
+              <td>{{item.PhanKhuc}}</td>
+              <td>{{item.VongTuaMay}}</td>
+              <td>{{item.MoMenXoan}}</td>
+              <td>{{formatCurrency(item.Giakhuyenmai)}}đ</td>
+              <td>{{item.ViewCount}}</td>
+              <td>{{item.ReducePrice}}</td>
+
+
+
+              <td>
+                <div style="padding-left:10px ;">
+                <a style="margin-left: 3px;" (click)="editItemsp(item.id,item.Maloai_id,item.Tensanpham,item.Anh,item.Soluong,item.Gia,item.Maluc,item.PhanKhuc,item.VongTuaMay,item.MoMenXoan,item.Giakhuyenmai,item.ViewCount,item.ReducePrice)" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                <a style="margin-left: 3px;" (click)="editItemsp(item.id,item.Maloai_id,item.Tensanpham,item.Anh,item.Soluong,item.Gia,item.Maluc,item.PhanKhuc,item.VongTuaMay,item.MoMenXoan,item.Giakhuyenmai,item.ViewCount,item.ReducePrice)"class="btn btn-info fa fa-eye"></a>
+                <a style="margin-left: 3px;" (click)="removeItemsp(item.id)" class="btn btn-danger "> <i class="fa fa-trash"></i></a>
+              </div>
+                 
+              
+              </td>
+
+
+          </tbody>
         </table>
         <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
       </div>

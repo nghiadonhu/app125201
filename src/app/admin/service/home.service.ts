@@ -167,6 +167,10 @@ export class HomeService {
       return this.http.post<any>(url, body);
     }
 
+    searchProducts(searchTerm: string): Observable<any> {
+      return this.http.get(`http://localhost:3000/sanpham/timkiemg`, { params: { searchTerm } });
+    }
+
     editItemtt(id: number,
       Nhanvien_id: number,
       Ngaynhap: any,

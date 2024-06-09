@@ -20,7 +20,8 @@ import { throwError } from 'rxjs';
 })
 export class QlsanphamComponent {
   constructor(private api : HomeService, private router: Router,private decimalPipe: DecimalPipe) {}
- 
+  searchTerm: string = ''; 
+  searchResult: any;
   p: number = 1;
   subjects: any;
   selectedItem: any | null = null;
@@ -52,7 +53,20 @@ removeItemsp(id: number): void {
     });
   }
 }
+search(): void {
+  if (!this.searchTerm.trim()) {
+    return; // Không tìm kiếm nếu không có giá trị tìm kiếm
+  }
 
+  this.api.searchProducts(this.searchTerm).subscribe(
+    result => {
+      this.searchResult = result;
+    },
+    error => {
+      console.error('Error searching products:', error);
+    }
+  );
+}
 
 // removeItemsp(id: number): void {
 //   this.api.removeItemsp(id).subscribe(res => {

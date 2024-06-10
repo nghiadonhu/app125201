@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router  } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { HomeService } from '../service/home.service';
-
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 @Component({
   selector: 'app-qlcthdn',
   templateUrl: './qlcthdn.component.html',
@@ -16,6 +17,7 @@ import { HomeService } from '../service/home.service';
   ]
 })
 export class QlcthdnComponent implements OnInit {
+  subjects: any;
   product: any;
   productId: any;
   p: number = 1;
@@ -43,8 +45,24 @@ console.log(this.productId)
         }
       );
     });
-  }
 
+    this.homeService.getListsp().pipe(
+      catchError(error => {
+        console.error('Error getting list:', error);
+        alert('Bạn không có quyền xem.');
+        this.router.navigate(['/admin/thongke']);
+        return throwError(error);
+      })
+    ).subscribe(res => {
+      this.subjects = res;
+      console.log(this.subjects);
+      
+    });
+  }
+  getEmployeeNameById(employeeId: number): string {
+    const employee = this.subjects.find((emp: any) => emp.id === employeeId);
+    return employee ? employee.Tensanpham : 'Unknown';
+  }
   formatCurrency(price: number | null): string {
     if (price === null) {
       return 'N/A'; // hoặc giá trị mặc định khác tùy thuộc vào yêu cầu của bạn

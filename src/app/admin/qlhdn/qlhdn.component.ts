@@ -18,7 +18,8 @@ import { throwError } from 'rxjs';
 })
 export class QlhdnComponent {
   constructor(private api : HomeService, private router: Router,private decimalPipe: DecimalPipe) {}
-  
+  nv:any;
+  ncc:any;
   subjects: any;
   selectedItem: any | null = null;
   selectedNhanvien_id: any;
@@ -38,6 +39,41 @@ ngOnInit(): void {
     console.log(this.subjects);
     
   });
+
+  this.api.getListnv().pipe(
+    catchError(error => {
+      console.error('Error getting list:', error);
+      alert('Bạn không có quyền xem.');
+      this.router.navigate(['/admin/thongke']);
+      return throwError(error);
+    })
+  ).subscribe(res => {
+    this.nv = res;
+    console.log(this.nv);
+    
+  });
+
+  this.api.getListncc().pipe(
+    catchError(error => {
+      console.error('Error getting list:', error);
+      alert('Bạn không có quyền xem.');
+      this.router.navigate(['/admin/thongke']);
+      return throwError(error);
+    })
+  ).subscribe(res => {
+    this.ncc = res;
+    console.log(this.ncc);
+    
+  });
+
+}
+getEmployeeNameById(employeeId: number): string {
+  const employee = this.nv.find((emp: any) => emp.id === employeeId);
+  return employee ? employee.Tennhanvien : 'Unknown';
+}
+getEmployeeNameByIdncc(employeeId: number): string {
+  const employee = this.ncc.find((emp: any) => emp.id === employeeId);
+  return employee ? employee.Tenncc : 'Unknown';
 }
 
 removeItemhdn(id: number): void {

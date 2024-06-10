@@ -6,7 +6,7 @@
     </div>
 
     <div class="card-body">
-      <a class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatacthdn']">Thêm</a>
+      <a style=" margin-bottom: 10px;" class="btn btn-dark fa fa-plus" [routerLink]="['/admin/adddatacthdn']">Thêm</a>
 
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -16,7 +16,7 @@
               <!-- <th>Khachhang_id</th> -->
               <th>Mã hóa đơn nhập</th>
              
-              <th>Mã sản phẩm</th>
+              <th>Tên sản phẩm</th>
               <!-- <th>Tensanpham</th> -->
               <th>Đơn giá</th>
               <th>Số lượng</th>
@@ -37,7 +37,7 @@
               <td>{{item.Hoadonnhap_id}}</td>
              
 
-              <td>{{item.Sanpham_id}}</td>
+              <td>{{ getEmployeeNameById(item.Sanpham_id) }}</td>
               <!-- <td>{{item.Tensanpham}}</td> -->
               <td>{{formatCurrency(item.Dongia)}}đ</td>
               <td>{{item.Soluong}}</td>

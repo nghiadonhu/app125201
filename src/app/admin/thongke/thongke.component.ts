@@ -37,6 +37,9 @@ export class ThongkeComponent implements OnInit {
   
   availableMonths: any[] = [];
   availableDays: any[] = [];
+
+  bestSellers: any[] = [];
+
   ngOnInit(): void {
     this.fetchThongKe();
     this.ThongKeMon();
@@ -65,9 +68,19 @@ export class ThongkeComponent implements OnInit {
 
     // Gọi API khi trang được tải lần đầu
     this.fetchStatistics();
+    this.fetchBestSellers();
   }
 
-
+  fetchBestSellers(): void {
+    this.api.getBestSellers(this.selectedYear, this.selectedMonth, this.selectedDay).subscribe(
+      (data) => {
+        this.bestSellers = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
   fetchStatistics(): void {
     
     this.api.getStatistics(this.selectedYear, this.selectedMonth, this.selectedDay).subscribe(
@@ -86,16 +99,19 @@ export class ThongkeComponent implements OnInit {
   onYearChange(): void {
     // Gọi API khi năm được chọn thay đổi
     this.fetchStatistics();
+    this.fetchBestSellers();
   }
 
   onMonthChange(): void {
     // Gọi API khi tháng được chọn thay đổi
     this.fetchStatistics();
+    this.fetchBestSellers();
   }
 
   onDayChange(): void {
     // Gọi API khi ngày được chọn thay đổi
     this.fetchStatistics();
+    this.fetchBestSellers();
   }
 
 

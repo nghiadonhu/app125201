@@ -16,8 +16,15 @@
         <label for="Thanhtien">Thành tiền:</label>
         <input type="number" id="Thanhtien" name="Thanhtien" ngModel class="form-control" required>
       </div>
-  
+
       <div class="form-group">
+        <label for="Ncc_id">Ncc_id:</label>
+        <select id="Ncc_id" name="Ncc_id" [(ngModel)]="selectedNcc_id" class="form-control" required>
+          <option *ngFor="let subject of ncc" [value]="subject.id">{{ subject.id }}</option>
+        </select>
+      </div>
+  
+      <!-- <div class="form-group">
         <label for="Ngaynhap">Ngày nhập</label>
         <input type="text" id="Ngaynhap" name="Ngaynhap" ngModel class="form-control" required>
       </div>
@@ -27,7 +34,7 @@
         <select id="Ncc_id" name="Ncc_id" [(ngModel)]="selectedNcc_id" class="form-control" required>
           <option *ngFor="let subject of ncc" [value]="subject.id">{{ subject.id }}</option>
         </select>
-      </div>
+      </div> -->
       
   
       
